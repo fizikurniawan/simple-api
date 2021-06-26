@@ -1,0 +1,5 @@
+.env
+
+# npm to run nodemon
+package-lock.json
+node_modules/*
