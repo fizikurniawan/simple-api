@@ -7,6 +7,7 @@ import (
 
 	"simple-api/api/app/account"
 	"simple-api/api/app/authentication"
+	"simple-api/api/app/food"
 
 	"github.com/labstack/echo/v4"
 )
@@ -25,4 +26,5 @@ func Init(g *echo.Group) {
 
 	authentication.NewHandler().Route(g.Group("/authentication"))
 	account.NewHandler().Route(g.Group("/account"))
+	food.NewHandler().Route(g.Group("/food"))
 }

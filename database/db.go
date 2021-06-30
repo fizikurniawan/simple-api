@@ -7,6 +7,7 @@ import (
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var db *gorm.DB
@@ -26,7 +27,9 @@ func Init() {
 		"host=%s user=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
 		DB_HOST, DB_USER, DB_NAME, DB_PORT, DB_SSLMODE, DB_TZ,
 	)
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	})
 
 	if err != nil {
 		panic("failed to connect database")
@@ -34,6 +37,7 @@ func Init() {
 
 	// Migration
 	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.Food{})
 }
 
 func DbManager() *gorm.DB {
